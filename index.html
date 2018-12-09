@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Austin_Brady_final_project</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>index</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11771,17 +11771,78 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="CMSC320-Final-Tutorial">CMSC320 Final Tutorial<a class="anchor-link" href="#CMSC320-Final-Tutorial">&#182;</a></h1><p>By: Austin Brady</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">&#182;</a></h1><p>&emsp;0. Introduction<br>
+&emsp;1. Data Scraping/Preparation</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="0.-Introduction">0. Introduction<a class="anchor-link" href="#0.-Introduction">&#182;</a></h1><p>Some say golf is a game of luck. While this may be true for the weekend player hacking it around his local municipal course, the players on the PGA Tour are a different beast. They bomb drives down the fairway with pinpoint accuracy and have beautiful short games to match. The question remians though: What makes a layer have a great season? In this tutorial, I will answer that question as I walk you through the steps of the data analysis pipeline.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="1.Data-Scraping/Preparation-(Data-Munging)">1.Data Scraping/Preparation (Data Munging)<a class="anchor-link" href="#1.Data-Scraping/Preparation-(Data-Munging)">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Libraries needed:<br>
+&emsp;1.requests: Used to send and recieve GEt requests for different web pages on the PGA Tour website<br>
+&emsp;2.BeautifulSoup: Used to parse the html retrieved by the GTE request<br>
+&emsp;3.Pandas: Used to create data sturctures to organize data for ease of analysis<br>
+&emsp;4.Pickle(optional): Used to store data structure in an external file for quicker subsequent retrievals (multiple get requests take up time)</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># libraries for this project</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
+</pre></div>
 
-<span class="n">pga_page_url</span> <span class="o">=</span> <span class="s2">&quot;http://www.pgatour.com&quot;</span>
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pga_page_url</span> <span class="o">=</span> <span class="s2">&quot;http://www.pgatour.com&quot;</span>
 <span class="n">basic_stat_url_format</span> <span class="o">=</span> <span class="s2">&quot;http://www.pgatour.com/stats/stat.</span><span class="si">%s</span><span class="s2">.2018.html&quot;</span>
 <span class="n">basic_category_url</span> <span class="o">=</span> <span class="s2">&quot;http://www.pgatour.com/stats/categories.</span><span class="si">%s</span><span class="s2">.html&quot;</span>
 <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ROTT_INQ&#39;</span><span class="p">,</span> <span class="s1">&#39;RAPP_INQ&#39;</span><span class="p">,</span> <span class="s1">&#39;RARG_INQ&#39;</span><span class="p">,</span> <span class="s1">&#39;RPUT_INQ&#39;</span><span class="p">,</span> <span class="s1">&#39;RSCR_INQ&#39;</span><span class="p">,</span> <span class="s1">&#39;RMNY_INQ&#39;</span><span class="p">,</span><span class="s1">&#39;RPTS_INQ&#39;</span><span class="p">]</span>
@@ -11791,7 +11852,19 @@ div#notebook {
 <span class="s1">&#39;SG:OFF-THE-TEE&#39;</span><span class="p">,</span><span class="s1">&#39;DRIVING DISTANCE&#39;</span><span class="p">,</span><span class="s1">&#39;DRIVING ACCURACY PERCENTAGE&#39;</span><span class="p">,</span>
 <span class="s1">&#39;TOTAL DRIVING&#39;</span><span class="p">,</span><span class="s1">&#39;BALL STRIKING&#39;</span><span class="p">,</span><span class="s1">&#39;SG: APPROACH-THE-GREEN&#39;</span><span class="p">,</span><span class="s1">&#39;GREENS IN REGULATION PERCENTAGE&#39;</span><span class="p">,</span><span class="s1">&#39;SG:ARROUND-THE-GREEN&#39;</span><span class="p">,</span>
 <span class="s1">&#39;SCRAMBLING&#39;</span><span class="p">,</span><span class="s1">&#39;SG: PUTTING&#39;</span><span class="p">,</span><span class="s1">&#39;SG: TOTAL&#39;</span><span class="p">,</span><span class="s1">&#39;SCORING AVERAGE&#39;</span><span class="p">,</span><span class="s1">&#39;OFFICIAL MONEY&#39;</span><span class="p">,</span><span class="s1">&#39;TOP 10 FINISHES&#39;</span><span class="p">,</span><span class="s1">&#39;FEDEXCUP SEASON POINTS&#39;</span><span class="p">,</span><span class="s1">&#39;FEDEXCUP STANDINGS&#39;</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
     <span class="n">spec_category_url</span> <span class="o">=</span> <span class="n">basic_category_url</span> <span class="o">%</span> <span class="n">category</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">spec_category_url</span><span class="p">)</span>
     <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
@@ -11799,7 +11872,19 @@ div#notebook {
         <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">categories_i_care_about</span> <span class="ow">and</span> <span class="n">link</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stat_ids</span><span class="p">:</span>
                 <span class="n">stat_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">identifier</span> <span class="ow">in</span> <span class="n">stat_ids</span><span class="p">:</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">identifier</span> <span class="ow">in</span> <span class="n">stat_ids</span><span class="p">:</span>
     <span class="n">spec_stat_url</span> <span class="o">=</span> <span class="n">basic_stat_url_format</span> <span class="o">%</span> <span class="n">identifier</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">spec_stat_url</span><span class="p">)</span>
     <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
@@ -11825,8 +11910,6 @@ div#notebook {
     <span class="n">pga_tour_stats_dict</span><span class="p">[</span><span class="n">stat_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pga_tour_stats_dict</span><span class="p">[</span><span class="n">stat_name</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;RANK LAST WEEK&#39;</span><span class="p">])</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./pga_data.pk&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fi</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pga_tour_stats_dict</span><span class="p">,</span><span class="n">fi</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./pga_data.pk&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fi</span><span class="p">:</span>
-    <span class="n">pga_tour_stats_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fi</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11839,7 +11922,9 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pga_tour_stats_dict</span><span class="p">[</span><span class="s1">&#39;SG: TEE-TO-GREEN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./pga_data.pk&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fi</span><span class="p">:</span>
+    <span class="n">pga_tour_stats_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fi</span><span class="p">)</span>
+<span class="n">pga_tour_stats_dict</span><span class="p">[</span><span class="s1">&#39;SG: TEE-TO-GREEN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
